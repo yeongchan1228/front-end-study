@@ -7,7 +7,8 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    const Btn = React.createElement("button", { id: "testBtn" }, "hello");
+    // const Btn = React.createElement("button", { id: "testBtn" }, "hello");
+
     // function H3() {
     //   return (
     //     <h3 id="titlte" onMouseEnter={() => console.log("mouse enter")}>
@@ -19,7 +20,7 @@
     //   <button
     //     id="btn"
     //     style={{ backgroundColor: "tomato" }}
-    //     onClick={() => console.log("clicked!")}
+    // onClick={() => console.log("clicked!")}
     //   >
     //     Click me!
     //   </button>
@@ -53,21 +54,69 @@
     //     <Button />
     //   </div>
     // );
-    const root = document.getElementById("root");
-    function App() {
-      const [counter, setCounter] = React.useState(0);
-      const onClick = () => {
-        setCounter((current) => current + 1);
-      };
 
+    // const root = document.getElementById("root");
+    // function App() {
+    //   const [counter, setCounter] = React.useState(0);
+    //   const onClick = () => {
+    //     setCounter((curnt) => current + 1);
+    //   };
+
+    //   return (
+    //     <div>
+    //       <h3>Total Click = {counter}</h3>
+    //       <button onClick={onClick}>Click me!</button>
+    //     </div>
+    //   );
+    // }
+
+    function App() {
+      const [time, setTime] = React.useState();
+      const [flipped, setflipped] = React.useState(false);
+      const onFlip = () => {
+        setflipped((current) => !current);
+        onReset();
+      };
+      const onChange = (event) => {
+        setTime((current) => event.target.value);
+      };
+      const onReset = () => setTime(0);
       return (
         <div>
-          <h3>Total Click = {counter}</h3>
-          <button onClick={onClick}>Click me!</button>
+          <h1 className="hi">Time Converter</h1>
+          <div>
+            <label htmlFor="minutes">Minutes = </label>
+            <input
+              value={!flipped ? time : time * 60}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              disabled={flipped}
+              onChange={onChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">Hours = </label>
+            <input
+              value={flipped ? time : time / 60}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              disabled={!flipped}
+              onChange={onChange}
+            />
+          </div>
+          <button id="reset" onClick={onReset}>
+            Reset
+          </button>
+          <button id="flip" onClick={onFlip}>
+            Flip
+          </button>
         </div>
       );
     }
 
+    const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
 </html>
