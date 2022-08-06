@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const Btn = React.createElement("button", { id: "testBtn" }, "hello");
+    // function H3() {
+    //   return (
+    //     <h3 id="titlte" onMouseEnter={() => console.log("mouse enter")}>
+    //       안녕하세요.
+    //     </h3>
+    //   );
+    // }
+    // const Button = () => (
+    //   <button
+    //     id="btn"
+    //     style={{ backgroundColor: "tomato" }}
+    //     onClick={() => console.log("clicked!")}
+    //   >
+    //     Click me!
+    //   </button>
+    // );
+
+    // const h3 = React.createElement(
+    //   "h3",
+    //   {
+    //     id: "tittle",
+    //     onMouseEnter: () => console.log("mouse enter"),
+    //   },
+    //   "안녕하세요."
+    // );
+    // const btn = React.createElement(
+    //   "button",
+    //   {
+    //     onClick: () => console.log("Im clicked"),
+    //     style: { backgroundColor: "tomato" },
+    //   },
+    //   "Click me"
+    // );
+    // const container = React.createElement("div", null, [h3, btn]);
+    // JSX는 반드시 대문자로 변수, 함수 명을 시작해야 한다. -> HTML 등 다른 것과 충돌을 피하기 위해서
+    // const Container = () => (
+    //   <div>
+    //     <h3 id="titlte" onMouseEnter={() => console.log("mouse enter")}>
+    //       안녕하세요.
+    //     </h3>
+    //     <Button />
+    //     <Button />
+    //     <Button />
+    //   </div>
+    // );
+    const root = document.getElementById("root");
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        setCounter((current) => current + 1);
+      };
+
+      return (
+        <div>
+          <h3>Total Click = {counter}</h3>
+          <button onClick={onClick}>Click me!</button>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, root);
+  </script>
+</html>
