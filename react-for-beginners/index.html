@@ -71,10 +71,88 @@
     // }
 
     function App() {
+      const [index, setIndex] = React.useState("0");
+      const onSelect = (event) => {
+        setIndex((current) => event.target.value);
+      };
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="0">Select your option</option>
+            <option value="1">Minutes & Hours</option>
+            <option value="2">Kilometer & Milse</option>
+          </select>
+          {index === "0" ? <SelectOption /> : null}
+          {index === "1" ? <MinutesToHours /> : null}
+          {index === "2" ? <KmToMiles /> : null}
+        </div>
+      );
+    }
+
+    function SelectOption() {
+      return (
+        <div>
+          <h3>Select Option.</h3>
+        </div>
+      );
+    }
+
+    function KmToMiles() {
+      const [len, setLen] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+      const onChange = (event) => {
+        setLen((current) => setLen(event.target.value));
+      };
+
+      const onReset = () => {
+        setLen(0);
+      };
+      const onFlipped = () => {
+        onReset();
+        setFlipped((current) => !current);
+      };
+
+      return (
+        <div>
+          <h3>Kilometer To Miles</h3>
+          <div>
+            <lable htmlFor="kilometer">Kilometer = </lable>
+            <input
+              value={flipped ? len / 0.62137 : len}
+              id="kilometer"
+              placeholder="Kilometer"
+              type="number"
+              onChange={onChange}
+              disabled={flipped}
+            ></input>
+          </div>
+          <div>
+            <label htmlFor="mile">Mile = </label>
+            <input
+              value={flipped ? len : len * 0.62137}
+              id="mile"
+              placeholder="Mile"
+              type="number"
+              onChange={onChange}
+              disabled={!flipped}
+            ></input>
+          </div>
+          <button id="reset" onClick={onReset}>
+            Reset
+          </button>
+          <button id="filp" onClick={onFlipped}>
+            Flip
+          </button>
+        </div>
+      );
+    }
+
+    function MinutesToHours() {
       const [time, setTime] = React.useState();
-      const [flipped, setflipped] = React.useState(false);
+      const [flipped, setFlipped] = React.useState(false);
       const onFlip = () => {
-        setflipped((current) => !current);
+        setFlipped((current) => !current);
         onReset();
       };
       const onChange = (event) => {
@@ -83,7 +161,7 @@
       const onReset = () => setTime(0);
       return (
         <div>
-          <h1 className="hi">Time Converter</h1>
+          <h3>Hours To Minutes</h3>
           <div>
             <label htmlFor="minutes">Minutes = </label>
             <input
