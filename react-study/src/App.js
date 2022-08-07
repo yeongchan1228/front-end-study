@@ -1,27 +1,15 @@
-import { useEffect, useState } from "react";
-
-function Hello() {
-  function destroyedFn() {
-    console.log("destroyed.");
-  }
-  function effectFn() {
-    console.log("created.");
-    return destroyedFn;
-  }
-  useEffect(effectFn, []);
-  return <h1>Hello</h1>;
-}
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./practice/movie-routes/Home";
+import Detail from "./practice/movie-routes/Detail";
 
 function App() {
-  const [showing, setShowing] = useState(false);
-  const onClick = () => {
-    setShowing((prev) => !prev);
-  };
   return (
-    <div>
-      {showing ? <Hello /> : null}
-      <button onClick={onClick}>{showing ? "Hide" : "show"}</button>
-    </div>
+    <Router basename={process.env.PUBLIC_URL}>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/movie/:id" element={<Detail />}></Route>
+      </Routes>
+    </Router>
   );
 }
 
