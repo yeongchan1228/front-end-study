@@ -1,6 +1,5 @@
-import { View, Text } from "react-native";
-import BasicLayOut from "./basic/Layout";
+import WeathreApp from "./project1/WeatherApp";
 
 export default function App() {
-  return <BasicLayOut></BasicLayOut>;
+  return <WeathreApp />;
 }
