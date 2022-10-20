@@ -8,10 +8,18 @@ import {
 } from "react-native";
 import { useEffect, useState } from "react";
 import * as Location from "expo-location";
+import { Ionicons } from "@expo/vector-icons";
 
 const { height: SCREENT_HEIGHT, width: SCREEN_WITH } = Dimensions.get("window");
 
 const API_KEY = "발급 받은 API 키";
+
+const icons = {
+  Clouds: "cloudy",
+  Clear: "sunny",
+  Snow: "snow",
+  Rain: "rainy",
+};
 
 export default function WeathreApp() {
   const [city, setCity] = useState("Loading...");
@@ -48,7 +56,6 @@ export default function WeathreApp() {
         );
         const weatherJson = await weatherResponse.json();
         setdayWeathers(weatherJson.daily);
-        console.log(dayWeathers);
       }
     })();
   }, []);
@@ -71,9 +78,23 @@ export default function WeathreApp() {
         ) : (
           dayWeathers.map((day, index) => {
             <View style={styles.day}>
-              <Text style={styles.temp}>
-                {parseFloat(day.tmep.day).toFixed(1)}
-              </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  width: "100%",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={styles.temp}>
+                  {parseFloat(day.tmep.day).toFixed(1)}
+                </Text>
+                <Ionicons
+                  name={icons[day.weather[0].main]}
+                  size={40}
+                  color="black"
+                />
+              </View>
               <Text style={styles.description}>{day.weather[0].main}</Text>
               <Text style={styles.tinyText}>{day.weather[0].description}</Text>
             </View>;
