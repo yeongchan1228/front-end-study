@@ -9,10 +9,12 @@ import {
   TouchableWithoutFeedback,
   Pressable,
   ScrollView,
+  Alert,
 } from "react-native";
 import { theme } from "../colors";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AntDesign } from "@expo/vector-icons";
 
 const STORAGE_KEY = "@toDos";
 
@@ -43,6 +45,20 @@ export default function TodoApp() {
   };
   const loadToDos = async () => {
     setToDos(JSON.parse(await AsyncStorage.getItem(STORAGE_KEY)));
+  };
+  const deleteToDo = async (toDoId) => {
+    Alert.alert("Delete To-Do", "really?", [
+      { text: "Cancel" },
+      {
+        text: "Ok",
+        onPress: () => {
+          const newToDos = { ...toDos };
+          delete newToDos[toDoId];
+          setToDos(newToDos);
+          storeTodos(newToDos);
+        },
+      },
+    ]);
   };
 
   useEffect(() => {
@@ -101,6 +117,16 @@ export default function TodoApp() {
           toDos[key].isWorking === isWorking ? (
             <View style={styles.toDos} key={key}>
               <Text style={styles.toDosText}>{toDos[key].text}</Text>
+              <Pressable
+                onPress={() => deleteToDo(key)}
+                style={({ pressed }) => [
+                  {
+                    opacity: pressed ? 0.5 : 1,
+                  },
+                ]}
+              >
+                <AntDesign name="delete" size={20} color={theme.gray} />
+              </Pressable>
             </View>
           ) : null
         )}
@@ -142,6 +168,9 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 20,
     borderRadius: 15,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   toDosText: {
     color: "white",
