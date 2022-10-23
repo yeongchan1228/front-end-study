@@ -1,5 +1,5 @@
-import WeathreApp from "./project1/WeatherApp";
+import TodoApp from "./project2/TodoApp";
 
 export default function App() {
-  return <WeathreApp />;
+  return <TodoApp />;
 }
