@@ -11,7 +11,10 @@ import {
   ScrollView,
 } from "react-native";
 import { theme } from "../colors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const STORAGE_KEY = "@toDos";
 
 export default function TodoApp() {
   const [isWorking, setWorking] = useState(true);
@@ -21,14 +24,31 @@ export default function TodoApp() {
   const travel = () => setWorking(false);
   const work = () => setWorking(true);
   const onChangeText = (payload) => setText(payload);
-  const addTodo = () => {
+  const addTodo = async () => {
     if (text === "") {
       return;
     }
     // save to-do
-    setToDos({ ...toDos, [Date.now()]: { text, isWorking: isWorking } });
+    const newToDos = { ...toDos, [Date.now()]: { text, isWorking: isWorking } };
+    setToDos(newToDos);
+    await storeTodos(newToDos);
     setText("");
   };
+  const storeTodos = async (value) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const loadToDos = async () => {
+    setToDos(JSON.parse(await AsyncStorage.getItem(STORAGE_KEY)));
+  };
+
+  useEffect(() => {
+    loadToDos();
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar style="white" />
@@ -77,11 +97,13 @@ export default function TodoApp() {
         placeholder={isWorking ? "Add a To-Do!" : "Where do you want go?"}
       ></TextInput>
       <ScrollView>
-        {Object.keys(toDos).map((key) => (
-          <View style={styles.toDos} key={key}>
-            <Text style={styles.toDosText}>{toDos[key].text}</Text>
-          </View>
-        ))}
+        {Object.keys(toDos).map((key) =>
+          toDos[key].isWorking === isWorking ? (
+            <View style={styles.toDos} key={key}>
+              <Text style={styles.toDosText}>{toDos[key].text}</Text>
+            </View>
+          ) : null
+        )}
       </ScrollView>
     </View>
   );
