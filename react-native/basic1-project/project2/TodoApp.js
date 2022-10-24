@@ -10,6 +10,7 @@ import {
   Pressable,
   ScrollView,
   Alert,
+  Platform,
 } from "react-native";
 import { theme } from "../colors";
 import { useEffect, useState } from "react";
@@ -44,21 +45,37 @@ export default function TodoApp() {
     }
   };
   const loadToDos = async () => {
-    setToDos(JSON.parse(await AsyncStorage.getItem(STORAGE_KEY)));
+    try {
+      setToDos(JSON.parse(await AsyncStorage.getItem(STORAGE_KEY)));
+    } catch (e) {
+      setToDos({});
+    }
   };
-  const deleteToDo = async (toDoId) => {
-    Alert.alert("Delete To-Do", "really?", [
-      { text: "Cancel" },
-      {
-        text: "Ok",
-        onPress: () => {
-          const newToDos = { ...toDos };
-          delete newToDos[toDoId];
-          setToDos(newToDos);
-          storeTodos(newToDos);
+
+  const deleteToDo = (toDoId) => {
+    const newToDos = { ...toDos };
+    delete newToDos[toDoId];
+    setToDos(newToDos);
+    storeTodos(newToDos);
+  };
+
+  const deleteAlertToDo = async (toDoId) => {
+    if (Platform.OS === "web") {
+      const isOk = confirm("Delete To-Do?");
+      if (isOk) {
+        deleteToDo(toDoId);
+      }
+    } else {
+      Alert.alert("Delete To-Do", "really?", [
+        { text: "Cancel" },
+        {
+          text: "Ok",
+          onPress: () => {
+            deleteToDo(toDoId);
+          },
         },
-      },
-    ]);
+      ]);
+    }
   };
 
   useEffect(() => {
@@ -113,23 +130,24 @@ export default function TodoApp() {
         placeholder={isWorking ? "Add a To-Do!" : "Where do you want go?"}
       ></TextInput>
       <ScrollView>
-        {Object.keys(toDos).map((key) =>
-          toDos[key].isWorking === isWorking ? (
-            <View style={styles.toDos} key={key}>
-              <Text style={styles.toDosText}>{toDos[key].text}</Text>
-              <Pressable
-                onPress={() => deleteToDo(key)}
-                style={({ pressed }) => [
-                  {
-                    opacity: pressed ? 0.5 : 1,
-                  },
-                ]}
-              >
-                <AntDesign name="delete" size={20} color={theme.gray} />
-              </Pressable>
-            </View>
-          ) : null
-        )}
+        {toDos !== null &&
+          Object.keys(toDos).map((key) =>
+            toDos[key].isWorking === isWorking ? (
+              <View style={styles.toDos} key={key}>
+                <Text style={styles.toDosText}>{toDos[key].text}</Text>
+                <Pressable
+                  onPress={() => deleteAlertToDo(key)}
+                  style={({ pressed }) => [
+                    {
+                      opacity: pressed ? 0.5 : 1,
+                    },
+                  ]}
+                >
+                  <AntDesign name="delete" size={20} color={theme.gray} />
+                </Pressable>
+              </View>
+            ) : null
+          )}
       </ScrollView>
     </View>
   );
