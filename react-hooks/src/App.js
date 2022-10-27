@@ -1,7 +1,6 @@
-import UseInputEx from "./customHooks/useInput";
-
+import UseTabsEx from "./customHooks/useTabs";
 function App() {
-  return <UseInputEx />;
+  return <UseTabsEx />;
 }
 
 export default App;
