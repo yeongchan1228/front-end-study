@@ -1,7 +1,7 @@
-import UseStateEx from "./hooks/useState";
+import UseInputEx from "./customHooks/useInput";
 
 function App() {
-  return <UseStateEx />;
+  return <UseInputEx />;
 }
 
 export default App;
