@@ -1,6 +1,6 @@
-import UseTabsEx from "./customHooks/useTabs";
+import UseEffectEx from "./hooks/useEffectEx";
 function App() {
-  return <UseTabsEx />;
+  return <UseEffectEx />;
 }
 
 export default App;
