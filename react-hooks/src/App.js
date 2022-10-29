@@ -1,6 +1,6 @@
-import UseScrollEx from "./customHooks/useScroll";
+import UseFullScreenEx from "./customHooks/useFullScreen";
 function App() {
-  return <UseScrollEx />;
+  return <UseFullScreenEx />;
 }
 
 export default App;
