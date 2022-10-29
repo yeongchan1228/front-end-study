@@ -1,6 +1,6 @@
-import UseNotificationEx from "./customHooks/useNotification";
+import UseAxiosEx from "./customHooks/useAxios";
 function App() {
-  return <UseNotificationEx />;
+  return <UseAxiosEx />;
 }
 
 export default App;
