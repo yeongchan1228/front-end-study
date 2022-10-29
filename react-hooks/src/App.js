@@ -1,6 +1,6 @@
-import UseBeforeLeaveEx from "./customHooks/useBeforeLeave";
+import UseFadeInEx from "./customHooks/useFadeIn";
 function App() {
-  return <UseBeforeLeaveEx />;
+  return <UseFadeInEx />;
 }
 
 export default App;
