@@ -1,6 +1,6 @@
-import UseConfirmEx from "./customHooks/useConfirm";
+import UsePreventLeave from "./customHooks/usePreventLeave";
 function App() {
-  return <UseConfirmEx />;
+  return <UsePreventLeave />;
 }
 
 export default App;
