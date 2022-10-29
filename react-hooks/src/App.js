@@ -1,6 +1,6 @@
-import UseEffectEx from "./hooks/useEffectEx";
+import UseTitleEx from "./customHooks/useTitle";
 function App() {
-  return <UseEffectEx />;
+  return <UseTitleEx />;
 }
 
 export default App;
