@@ -1,6 +1,6 @@
-import UseNetworkEx from "./customHooks/useNetwork";
+import UseScrollEx from "./customHooks/useScroll";
 function App() {
-  return <UseNetworkEx />;
+  return <UseScrollEx />;
 }
 
 export default App;
