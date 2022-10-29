@@ -1,6 +1,6 @@
-import UseFullScreenEx from "./customHooks/useFullScreen";
+import UseNotificationEx from "./customHooks/useNotification";
 function App() {
-  return <UseFullScreenEx />;
+  return <UseNotificationEx />;
 }
 
 export default App;
