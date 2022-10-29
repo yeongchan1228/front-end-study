@@ -1,6 +1,6 @@
-import UseFadeInEx from "./customHooks/useFadeIn";
+import UseNetworkEx from "./customHooks/useNetwork";
 function App() {
-  return <UseFadeInEx />;
+  return <UseNetworkEx />;
 }
 
 export default App;
