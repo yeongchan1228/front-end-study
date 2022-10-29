@@ -1,6 +1,6 @@
-import UseClickEx from "./customHooks/useClick";
+import UseConfirmEx from "./customHooks/useConfirm";
 function App() {
-  return <UseClickEx />;
+  return <UseConfirmEx />;
 }
 
 export default App;
