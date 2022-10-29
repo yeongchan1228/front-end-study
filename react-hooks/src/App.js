@@ -1,6 +1,6 @@
-import UseTitleEx from "./customHooks/useTitle";
+import UseClickEx from "./customHooks/useClick";
 function App() {
-  return <UseTitleEx />;
+  return <UseClickEx />;
 }
 
 export default App;
