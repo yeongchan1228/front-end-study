@@ -1,6 +1,6 @@
-import UsePreventLeave from "./customHooks/usePreventLeave";
+import UseBeforeLeaveEx from "./customHooks/useBeforeLeave";
 function App() {
-  return <UsePreventLeave />;
+  return <UseBeforeLeaveEx />;
 }
 
 export default App;
