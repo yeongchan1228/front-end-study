@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "basic2-project",
+    "slug": "basic2-project",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "basic2-project"
+}
