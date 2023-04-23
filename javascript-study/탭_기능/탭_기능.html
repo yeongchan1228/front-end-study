@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="탭_기능.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <span class="card-title"></span>
+        <span class="card-price"></span>
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="list">
+        <!-- data-set은 data-자료이름 = "값"으로 사용자 몰래 값을 넣어서 사용할 수 있다. -->
+        <li class="tab-button" data-id="0">Products</li>
+        <li class="tab-button orange" data-id="1">Information</li>
+        <li class="tab-button" data-id="2">Shipping</li>
+      </ul>
+      <div class="tab-content">
+        <p>상품설명입니다. Product</p>
+      </div>
+      <div class="tab-content show">
+        <p>스펙설명입니다. Information</p>
+      </div>
+      <div class="tab-content">
+        <p>배송정보입니다. Shipping</p>
+      </div>
+    </div>
+
+    <form class="select-container form-group">
+      <p>상품선택</p>
+      <select class="form-select">
+        <option>모자</option>
+        <option>셔츠</option>
+      </select>
+      <select class="form-select"></select>
+    </form>
+
+    <div id="test"></div>
+
+    <script src="탭_기능.js"></script>
+  </body>
+</html>

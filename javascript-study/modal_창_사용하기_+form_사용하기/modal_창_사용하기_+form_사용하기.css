@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+}
+
+.dark-mode {
+  background: black;
+  color: white;
+}
+
+/* 처음 화면 */
+.main-container {
+  padding: 100px 20px;
+  background: lightgray;
+}
+
+.black-bg input {
+  margin-bottom: 5px;
+}
+
+.black-bg {
+  /* 처음 화면 */
+  box-sizing: border-box;
+  visibility: hidden; /* 모습만 숨기기 때문에 이것으로 줘야 애니메이션이 잘 작동한다. */
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  padding: 30px;
+  opacity: 0; /* 0은 완전 투명*/
+  transition: all 1s;
+}
+
+.white-bg {
+  text-align: center;
+  background: white;
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.show-modal {
+  /* 마지막 화면 */
+  visibility: visible;
+  opacity: 1;
+}
+
+.alert {
+  margin-top: 20px;
+  background: wheat;
+  padding: 30px;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="main.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div id="alter" class="alert-box">
+        <p id="content">알림 내용~~~</p>
+        <bution id="close" style="margin-left: 10px">닫기</bution>
+      </div>
+    </div>
+    <button
+      id="alter-btn"
+      class="alter-btn"
+      onclick="alterBnt('flex', '아이디를 입력해 주세요.')"
+    >
+      버튼1
+    </button>
+
+    <button
+      id="alter-btn"
+      class="alter-btn"
+      onclick="alterBnt('flex', '비밀번호를 입력해 주세요.')"
+    >
+      버튼2
+    </button>
+
+    <script>
+      function alterBnt(displayMode, content) {
+        document.getElementById("content").innerHTML = content;
+        document.getElementById("alter").style.display = displayMode;
+      }
+
+      document
+        .getElementById("close")
+        .addEventListener(
+          "mouseover",
+          () => (document.getElementById("alter").style.display = "none")
+        );
+    </script>
+  </body>
+</html>

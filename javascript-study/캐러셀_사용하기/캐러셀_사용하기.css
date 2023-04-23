@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+}
+
+.main-container {
+  overflow: hidden; /* 넘치는 부분을 숨긴다. 슬라이드바가 사라진다. */
+}
+
+.slide-container {
+  display: flex;
+  align-items: center;
+  width: 300vw;
+  position: relative;
+}
+
+.slide-box {
+  width: 100vw;
+  float: left;
+}
+
+.slide-box img {
+  width: 100%;
+  transition: all 1s;
+}
+
+/* .slide-box img:hover {
+  opacity: 0.5;
+} */
+
+.hover-btn {
+  display: none;
+  position: absolute;
+  margin: auto 0 0 auto;
+}
+
+.slide-btn {
+  text-align: center;
+}

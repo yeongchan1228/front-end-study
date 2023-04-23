@@ -1,0 +1,34 @@
+.main-container {
+  height: 1500px;
+}
+
+body {
+  margin: 0;
+}
+
+.navbar-container {
+  width: 100%;
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  display: flex;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: gray;
+}
+
+.navbar-content {
+  width: 50%;
+  font-size: 40px;
+}
+
+.navbar-button {
+  width: 50px;
+  margin-left: auto;
+}
+
+.terms {
+  width: 500px;
+  height: 400px;
+  overflow-y: scroll;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="스크롤_애니메이션.css" rel="stylesheet" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="card-background">
+      <div class="card-box">
+        <img src="card1.png" />
+      </div>
+      <div class="card-box">
+        <img src="card2.png" />
+      </div>
+      <div class="card-box">
+        <img src="card3.png" />
+      </div>
+    </div>
+
+    <script>
+      $(window).scroll(() => {
+        let 높이 = $(window).scrollTop();
+        console.log(높이);
+        // 680 ~ 990까지 첫째 카드 opacity 1~0으로
+        // 1차 함수 사용
+        // 1 = a * 680 + b
+        // 0 = a * 990 + b
+        // a, b 값 구해서 적용하기
+        let y = (-1 / 500) * 높이 + 115 / 50;
+        $(".card-box").eq(0).css("opacity", y);
+
+        // 사이즈 작아지게 하기
+        var z = (-1 / 5000) * 높이 + 565 / 500;
+        $(".card-box").eq(0).css("transform", `scale( ${z} )`);
+      });
+    </script>
+  </body>
+</html>

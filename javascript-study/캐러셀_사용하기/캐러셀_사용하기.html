@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="캐러셀_사용하기.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="slide-container">
+        <div class="slide-box">
+          <!-- draggable => 이미지를 잡아서 끌어당기는 행위 -->
+          <img src="car1.png" draggable="false" />
+        </div>
+        <div class="slide-box">
+          <img src="car2.png" draggable="false" />
+        </div>
+        <div class="slide-box">
+          <img src="car3.png" draggable="false" />
+        </div>
+        <div class="hover-btn">
+          <button>다음 이미지</button>
+        </div>
+      </div>
+      <div class="slide-btn">
+        <button id="slide-btn1">1</button>
+        <button id="slide-btn2">2</button>
+        <button id="slide-btn3">3</button>
+        <button id="slide-next-bnt">다음</button>
+      </div>
+    </div>
+
+    <script>
+      console.log((5555 * 1.1).toFixed(2));
+      document.getElementById("slide-btn1").addEventListener("click", () => {
+        document.getElementsByClassName("slide-container")[0].style.transform =
+          "translateX(0vw)";
+      });
+
+      document.getElementById("slide-btn2").addEventListener("click", () => {
+        document.getElementsByClassName("slide-container")[0].style.transform =
+          "translateX(-100vw)";
+      });
+
+      document.getElementById("slide-btn3").addEventListener("click", () => {
+        document.getElementsByClassName("slide-container")[0].style.transform =
+          "translateX(-200vw)";
+      });
+
+      let nowPos = 1;
+      document
+        .getElementById("slide-next-bnt")
+        .addEventListener("click", () => {
+          if (nowPos === 1) {
+            document.getElementsByClassName(
+              "slide-container"
+            )[0].style.transform = "translateX(-100vw)";
+            nowPos = 2;
+          } else if (nowPos === 2) {
+            document.getElementsByClassName(
+              "slide-container"
+            )[0].style.transform = "translateX(-200vw)";
+            nowPos = 3;
+          } else if (nowPos === 3) {
+            document.getElementsByClassName(
+              "slide-container"
+            )[0].style.transform = "translateX(0vw)";
+            nowPos = 1;
+          }
+        });
+
+      // 1. 내가 사진을 드래그하면 드래그 한 만큼 사진 움직이게 하기
+      // 2. 손을 놓으면 완전 이동시킴
+
+      // mouse event -> mousedown(마우스를 누를때), mouseup(마우스를 뗐을 때), mousemove(마우스 움직였을 때)
+      // -> 마우스만 적용하는 것이기 때문에 모바일에서 터치도 적용하기 위해서는 touch 이벤트도 넣어줘야 한다.
+      // touch event -> touchstart(터치를 누를때), touchend(마우스를 뗐을 때), touchmove(마우스 움직였을 때)
+      // mouse 위치는 event.clientX
+      // touch 위치는 event.touches[0].clientX -> 0번 째 인덱스는 여러 손가락으로 터치하는 것을 방지하기 위해서(첫번 째 손가락만 적용)
+      // touchend에서의 touch 위치는 event.changedTouches[0].clientX로 확인한다.
+      let 시작좌표;
+      let 눌렀는지 = false;
+      document
+        .querySelectorAll(".slide-box")[0]
+        .addEventListener("mousedown", (evnet) => {
+          시작좌표 = event.clientX; // 현재 마우스 위치의 X 좌표를 알려준다.
+          눌렀는지 = true;
+        });
+
+      document
+        .querySelectorAll(".slide-box")[0]
+        .addEventListener("mouseup", (evnet) => {
+          눌렀는지 = false;
+
+          console.log(evnet.clientX - 시작좌표);
+          if (evnet.clientX - 시작좌표 < -100) {
+            document.querySelector(".slide-container").style.transition =
+              "all 0.5s";
+            document.querySelector(
+              ".slide-container"
+            ).style.transform = `translateX(-100vw)`;
+          } else {
+            document.querySelector(".slide-container").style.transition =
+              "all 0.5s";
+            document.querySelector(
+              ".slide-container"
+            ).style.transform = `translateX(0vw)`;
+          }
+
+          // transition이 계속 존재하면, 마우스 이동 시에도 translateX가 변경되기 떄문에 0.5초 씩 적용되어 버벅거린다.
+          // 마우스를 이동할 떄는 transition이 없도록 하고 뗐을 때 적용하기 위해, setTimeout으로 0.5초 후 transition 속성을 삭제한다.
+          setTimeout(() => {
+            document.querySelector(".slide-container").style.transition =
+              "none";
+          }, 500);
+        });
+
+      document
+        .querySelectorAll(".slide-box")[0]
+        .addEventListener("mousemove", (evnet) => {
+          let 이동거리 = event.clientX - 시작좌표;
+          if (눌렀는지 === true) {
+            document.querySelector(
+              ".slide-container"
+            ).style.transform = `translateX(${이동거리}px)`;
+          }
+        });
+
+      // 모바일 적용, 크롬 브라우저 개발자 도구에서 모바일 클릭
+      document
+        .querySelectorAll(".slide-box")[0]
+        .addEventListener("touchstart", (evnet) => {
+          시작좌표 = event.touches[0].clientX; // 현재 마우스 위치의 X 좌표를 알려준다.
+          눌렀는지 = true;
+        });
+
+      document
+        .querySelectorAll(".slide-box")[0]
+        .addEventListener("touchend", (evnet) => {
+          눌렀는지 = false;
+
+          console.log(evnet.changedTouches[0].clientX - 시작좌표);
+          if (evnet.changedTouches[0].clientX - 시작좌표 < -100) {
+            document.querySelector(".slide-container").style.transition =
+              "all 0.5s";
+            document.querySelector(
+              ".slide-container"
+            ).style.transform = `translateX(-100vw)`;
+          } else {
+            document.querySelector(".slide-container").style.transition =
+              "all 0.5s";
+            document.querySelector(
+              ".slide-container"
+            ).style.transform = `translateX(0vw)`;
+          }
+
+          // transition이 계속 존재하면, 마우스 이동 시에도 translateX가 변경되기 떄문에 0.5초 씩 적용되어 버벅거린다.
+          // 마우스를 이동할 떄는 transition이 없도록 하고 뗐을 때 적용하기 위해, setTimeout으로 0.5초 후 transition 속성을 삭제한다.
+          setTimeout(() => {
+            document.querySelector(".slide-container").style.transition =
+              "none";
+          }, 500);
+        });
+
+      document
+        .querySelectorAll(".slide-box")[0]
+        .addEventListener("touchmove", (evnet) => {
+          let 이동거리 = event.touches[0].clientX - 시작좌표;
+          if (눌렀는지 === true) {
+            document.querySelector(
+              ".slide-container"
+            ).style.transform = `translateX(${이동거리}px)`;
+          }
+        });
+    </script>
+  </body>
+</html>

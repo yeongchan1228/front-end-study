@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.alert-box {
+  background-color: skyblue;
+  padding: 20px;
+  margin: 5px;
+  color: white;
+  border-radius: 5px;
+  display: none; /* html 상에서 숨기는 방법 */
+}
+
+.alter-close {
+  margin-left: auto;
+}
+
+.alter-btn {
+  margin: 5px;
+}

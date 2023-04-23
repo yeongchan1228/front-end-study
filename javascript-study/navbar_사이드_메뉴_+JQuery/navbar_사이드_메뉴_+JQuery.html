@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="navbar_사이드_메뉴_+JQuery.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/afd06991e2.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- JQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main-container">
+      <nav class="navbar-container">
+        <span class="navbar-content">Navbar</span>
+        <button id="sub-menu-button" class="navbar-button">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+
+      <ul id="sub-menu-list" class="list-group">
+        <li class="list-group-item">
+          <span>A Item</span>
+        </li>
+        <li class="list-group-item">
+          <span>b Item</span>
+        </li>
+        <li class="list-group-item">
+          <span>C Item</span>
+        </li>
+        <li class="list-group-item">
+          <span>D Item</span>
+        </li>
+      </ul>
+
+      <p id="id1" class="hello">안녕</p>
+      <p class="hello">안녕</p>
+      <p class="hello">안녕</p>
+    </div>
+
+    <script>
+      $(".hello").html("바보").css("color", "red");
+      $("#id1").html("id 찾기").css("color", "red");
+      // $("#id1").fadeOut();
+      // $("#id1").slideUp();
+
+      $(".navbar-button").click(() => {
+        $(".list-group").toggleClass("nav-sub-menu-show");
+      });
+    </script>
+  </body>
+</html>

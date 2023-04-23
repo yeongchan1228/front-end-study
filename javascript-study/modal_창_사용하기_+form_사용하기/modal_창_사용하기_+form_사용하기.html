@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="modal_창_사용하기_+form_사용하기.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="modal" class="black-bg">
+      <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <form id="login-form" action="form-success.html">
+          <div>
+            <input id="username" type="text" />
+          </div>
+          <div>
+            <input id="password" type="password" />
+          </div>
+          <button type="submit">전송</button>
+          <button type="button" onclick="clickModalCloseBtn()">닫기</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="main-container">
+      <h4>Shirts on Sale</h4>
+      <button id="login-btn" onclick="clickLoginBtn()">로그인</button>
+      <div>
+        <button id="dark-mode" style="margin-top: 20px">다크모드</button>
+      </div>
+      <div id="5-alert" class="alert">
+        5초 이내 구매시 사은품 증정! <span id="time-span">5</span>
+      </div>
+    </div>
+
+    <script>
+      function clickLoginBtn() {
+        document.getElementById("modal").classList.toggle("show-modal");
+      }
+
+      // 닫기 버튼 클릭 시 모달 닫기
+      function clickModalCloseBtn() {
+        document.getElementById("modal").classList.remove("show-modal");
+      }
+
+      // 모달창 검은 배경 부분 클릭 시 모달 닫기
+      document.getElementById("modal").addEventListener("click", (event) => {
+        event.target;
+        console.log(event.target);
+        event.currentTarget;
+        console.log(event.currentTarget);
+        console.log(this);
+        // event.preventDefault();
+        // event.stopPropagation();
+
+        if (event.target === event.currentTarget) {
+          document.getElementById("modal").classList.remove("show-modal");
+        }
+      });
+
+      $("#login-form").on("submit", (event) => {
+        let username = $("#username").val();
+        if (username === null || username === undefined || username === "") {
+          alert("아이디 입력 안함...");
+          event.preventDefault(); /* form 전송 방지 */
+        } else if (!/[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+/.test(username)) {
+          alert("이메일 형식을 입력하세요...");
+          event.preventDefault(); /* form 전송 방지 */
+        }
+      });
+
+      $("#dark-mode").on("click", () => {
+        $("body").toggleClass("dark-mode");
+      });
+
+      // 5라는 시간이 1초마다 1씩 줄어들면서 5초 후 창이 사라지기
+      let time = 5;
+      setInterval(() => {
+        document.getElementById("time-span").innerHTML = --time;
+      }, 1000);
+      setTimeout(() => {
+        document.getElementById("5-alert").style.display = "none";
+      }, 5000);
+
+      // alert("안녕하세요");
+
+      console.log("abc".includes("a"));
+      console.log("abc".includes("ab"));
+
+      console.log(/a/.test("abcd"));
+      console.log(/[a-z]/.test("abcd"));
+      console.log(/[a-zA-Z]/.test("abcd"));
+      console.log(/[ㄱ-ㅎ가-힣]/.test("abcd"));
+      console.log(/\S/.test("abcd"));
+      console.log(/^a/.test("abcd"));
+      console.log(/[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+/.test("aasdasd@casehc.com"));
+    </script>
+  </body>
+</html>

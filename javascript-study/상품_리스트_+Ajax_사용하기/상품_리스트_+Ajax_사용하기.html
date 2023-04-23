@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="상품_리스트_+Ajax_사용하기.css" rel="stylesheet" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="card-group container">
+      <!-- <div class="card">
+        <img src="https://via.placeholder.com/600" />
+        <div class="card-body">
+          <h5>Card title</h5>
+          <p>가격 : 70000</p>
+          <button class="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/600" />
+        <div class="card-body">
+          <h5>Card title</h5>
+          <p>가격 : 70000</p>
+          <button class="btn btn-danger">주문하기</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://via.placeholder.com/600" />
+        <div class="card-body">
+          <h5>Card title</h5>
+          <p>가격 : 70000</p>
+          <button>주문하기</button>
+        </div> -->
+      <!-- </div> -->
+    </div>
+    <button id="plus">더보기</button>
+    <button id="sort">가격순정렬</button>
+
+    <script>
+      var products = [
+        { id: 0, price: 70000, title: "Blossom Dress" },
+        { id: 1, price: 50000, title: "Springfield Shirt" },
+        { id: 2, price: 60000, title: "Black Monastery" },
+      ];
+
+      // string 정렬
+      let arr = [7, 4, 6, 30, 20];
+      arr.sort(); //
+      // console.log(arr);
+
+      // number 정렬
+      arr.sort((a, b) => {
+        return a - b;
+      });
+      // console.log(arr);
+
+      // string 역순 정렬
+      let strs = ["b", "a", "c"];
+      strs.sort().reverse();
+      // console.log(strs);
+      strs.sort((a, b) => {
+        if (a < b) {
+          return 1;
+        } else if (a > b) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+      // console.log(strs);
+
+      let sortBtn = document.querySelector("#sort");
+      document.querySelector("#sort").addEventListener("click", () => {
+        document.querySelector(".card-group").innerHTML = "";
+        products.sort((a, b) => {
+          return a.price - b.price;
+        });
+
+        products.forEach((product) => {
+          setItems(product.title, product.price);
+        });
+      });
+
+      function setItems(title, price) {
+        let cardTemplate = `
+        <div class="card">
+            <img src="https://via.placeholder.com/600" />
+            <div class="card-body">
+              <h5>${title}</h5>
+              <p>가격 : ${price}</p>
+              <button class="btn btn-danger">주문하기</button>
+            </div>
+          </div>
+        `;
+        document
+          .querySelector(".card-group")
+          .insertAdjacentHTML("beforeend", cardTemplate);
+      }
+
+      products.forEach((product) => {
+        setItems(product.title, product.price);
+      });
+
+      let count = 1;
+      document.querySelector("#plus").addEventListener("click", () => {
+        $.get(`https://codingapple1.github.io/js/more${count}.json`).done(
+          (res) => {
+            res.forEach((data) => {
+              setItems(data.title, data.price);
+            });
+          }
+        );
+        count++;
+
+        if (count == 3) {
+          document.querySelector("#plus").style.display = "none";
+        }
+      });
+
+      // products.forEach((product, idx) => {
+      //   document.querySelectorAll(".card-body h5")[idx].innerHTML =
+      //     product.title;
+      //   document.querySelectorAll(".card-body p")[
+      //     idx
+      //   ].innerHTML = `가격 : ${product.price}`;
+      // });
+    </script>
+
+    <script>
+      // LocalStorage 사용하기
+      localStorage.setItem("이름", "test!!");
+      localStorage.removeItem("이름");
+
+      let testArray = [1, 2, 3];
+      let testObject = {
+        name: "test",
+        age: 10,
+      };
+      localStorage.setItem("Array", JSON.stringify(testArray));
+      localStorage.setItem("Object", JSON.stringify(testObject));
+
+      let localStorageArray = localStorage.getItem("Array");
+      // console.log(JSON.parse(localStorageArray));
+
+      localStorage.removeItem("Array");
+      localStorage.removeItem("Object");
+
+      // SessionStorage 사용하기
+      sessionStorage.setItem("key", "value");
+      sessionStorage.getItem("key");
+      sessionStorage.removeItem("key");
+
+      // Array, Object 저장하기
+      sessionStorage.setItem("Array", JSON.stringify(testArray));
+      sessionStorage.setItem("Object", JSON.stringify(testObject));
+
+      // Array, Object 가져와서 사용하기
+      let sessionStorageArray = sessionStorage.getItem("Array");
+      // console.log(JSON.parse(sessionStorageArray));
+
+      sessionStorage.removeItem("Array");
+      sessionStorage.removeItem("Object");
+
+      // 장바구니 기능 사용하기
+      // 이벤트 버블링 + siblings(형제 요소 가져오기) 사용하기
+
+      localStorage.removeItem("cart");
+      document
+        .querySelector(".card-group")
+        .addEventListener("click", (evnet) => {
+          document.querySelectorAll(".btn").forEach((btn, idx) => {
+            if (evnet.target === btn) {
+              let title =
+                btn.previousElementSibling.previousElementSibling.textContent;
+              if (localStorage.cart != null) {
+                let cart = JSON.parse(localStorage.cart);
+                cart.push(title);
+                localStorage.setItem("cart", JSON.stringify(cart));
+              } else {
+                localStorage.setItem("cart", JSON.stringify([title]));
+              }
+            }
+          });
+        });
+    </script>
+
+    <script>
+      // JQuery를 사용한 Ajax 요청
+      // $.get("https://codingapple1.github.io/hello.txt")
+      //   .done((res) => {
+      //     console.log(res);
+      //   })
+      //   .fail(() => {
+      //     console.log("실패");
+      //   });
+
+      // $.get("https://codingapple1.github.io/price.json")
+      //   .done((res) => {
+      //     console.log(res.price);
+      //   })
+      //   .fail(() => {
+      //     console.log("실패");
+      //   });
+
+      // 순수 AJax사용하기
+      // let req = new XMLHttpRequest();
+      // let serverAddress = "https://codingapple1.github.io/hello.txt";
+
+      // function reqListener(event) {
+      //   console.log(event);
+      // }
+      // req.addEventListener("load", (res) => {
+      //   console.log(res.currentTarget.response);
+      // });
+      // req.open("GET", serverAddress);
+      // req.send();
+
+      // // JavaScript 내장 HTTP Client(fetch) 사용하기
+      // fetch("https://codingapple1.github.io/price.json")
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //   })
+      //   .catch(() => {
+      //     console.log("실패");
+      //   });
+    </script>
+  </body>
+</html>
