@@ -1,0 +1,107 @@
+table {
+  border-collapse: collapse; /* 사이 사이의 틈을 없을 때 사용한다. */
+}
+
+/* vertical-align: 세로 정렬, top, middle, bottom, super(제곱 위치), sub(아래 첨자 위치)*/
+/* display: inline -> 항상 옆으로 채워지는 폭과 너비가 없는 요소 -> ex) span 태그*/
+
+.cart-main {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
+}
+.cart-background {
+  width: 100%;
+  background-color: #c2d3de;
+  padding: 30px;
+}
+
+.cart-table {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.cart-table td,
+.cart-table th {
+  padding: 15px;
+  border-bottom: 1px solid #c2d3de;
+  border-top: 1px solid #c2d3de;
+  text-align: center;
+}
+
+.cart-table th:nth-child(2) {
+  /* cart-table의 2번 째 자식에게 해당 스타일을 적용한다. */
+  width: 200px;
+}
+
+.cart-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: aqua;
+  cursor: pointer; /* 해당 요소에 갖다 대면, 마우스 포인터가 손 모양으로 변경된다. */
+}
+.cart-button:hover {
+  /* 마우스 올릴 시, 글자 색상 변경 */
+  color: red;
+}
+.cart-button:focus {
+  /* 마우스로 누르고 다른 곳을 클릭하기 전까지, 배경 색상 변경 */
+  background-color: brown;
+}
+.cart-button:active {
+  /* 마우스 클릭 시, 배경 색상 변경 */
+  background-color: blueviolet;
+}
+/* 표의 스타일링은 하나의 열에 적용하면 모든 열에 적용한다.*/
+/* 항상 DIV는 display:block으로 길게 박스 형태로 생성된다. 그니깐 요소가 어떻든 뼈대는 쭉 뻗어 있는 것이다. 그러므로 width를 항상 조정하고 margin: auto로 이동할 수 있게 해야 한다. */
+
+body {
+  margin: 0px;
+  font-family: "gulim";
+}
+
+@font-face {
+  font-family: "폰트 이름";
+
+  src: url("폰트 경로");
+}
+
+p,
+h4,
+h3,
+h2,
+h1,
+span {
+  transform: rotate(0.03deg);
+}
+
+.pseudo::first-letter {
+  color: red;
+  font-size: 30px;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  background-color: black;
+  color: white;
+}
+
+.input-file::file-selector-button {
+  background-color: skyblue;
+  border: none;
+}
+
+input[type="range"] {
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  background-color: red;
+  width: 50px;
+  height: 50px;
+}

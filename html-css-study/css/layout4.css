@@ -1,0 +1,43 @@
+.flex-item {
+  width: 100px;
+  height: 100px;
+  background-color: grey;
+  margin: 5px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav-container {
+  width: 97%;
+  display: flex;
+  background-color: grey;
+  padding: 10px;
+  position: fixed;
+  top: 5px;
+}
+
+.nav-item {
+  margin: 5px;
+}
+
+.left-long-size {
+  flex-grow: 1;
+  text-align: right;
+}
+
+body {
+  height: 1000px;
+}
+
+.custom {
+  color: red;
+}
+
+.custom {
+  color: white;
+}

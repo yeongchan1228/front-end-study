@@ -1,0 +1,35 @@
+.flip-outer {
+  width: 300px;
+  height: 300px;
+}
+
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative; /* position: absolute를 사용해서 앞/뒷면 배치를 위해 부모에 relative를 적용해야 한다. */
+  transition: all 1s;
+  transform-style: preserve-3d;
+}
+
+.flip-inner:hover {
+  transform: rotateY(180deg);
+}
+
+.front {
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  backface-visibility: hidden; /* 뒤로 돌았을 때 안 보이게 하는 설정 */
+}
+
+.back {
+  width: 100%;
+  height: 100%;
+  background: yellow;
+  padding-top: 70px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  transform: rotateY(180deg);
+}
