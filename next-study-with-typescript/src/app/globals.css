@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  background: #303030;
+  color: white;
+}
+
+.title {
+  text-align: center;
+  margin-top: 150px;
+  font-size: 30px;
+}
+
+.title-sub {
+  text-align: center;
+}
+
+.item {
+  margin: 20px auto;
+  width: 200px;
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.item-img {
+  width: 100%;
+  height: auto;
+}
+
+.navbar {
+  background: white;
+  padding: 20px;
+}
+
+.navbar a {
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.cart-item {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid grey;
+  line-height: 0px;
+}
+
+.link {
+  display: block;
+  text-decoration: none;
+  font-size: 30px;
+  margin: 30px;
+  color: bisque;
+}
+
+.list-item {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: rgb(224, 244, 224) 0px 2px 4px 0px;
+  opacity: 1;
+  transition: all 1s;
+}
+
+.list-item h4 {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0;
+  color: grey;
+}
+
+.list-item p {
+  color: grey;
+  margin: 5px 0px;
+}
+
+.post-write {
+  padding: 20px;
+  text-align: right;
+}
+
+.post-write h4 {
+  text-align: center;
+  font-size: 35px;
+}
+
+.post-write input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.post-write button {
+  padding: 10px 15px;
+  background: lightgrey;
+  border: none;
+  border-radius: 5px;
+}
